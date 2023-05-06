@@ -1,12 +1,18 @@
 <template>
   <section>
     <h1>Edit note</h1>
-    <hr/><br/>
+    <hr />
+    <br />
 
     <form @submit.prevent="submit">
       <div class="mb-3">
         <label for="title" class="form-label">Title:</label>
-        <input type="text" name="title" v-model="form.title" class="form-control" />
+        <input
+          type="text"
+          name="title"
+          v-model="form.title"
+          class="form-control"
+        />
       </div>
       <div class="mb-3">
         <label for="content" class="form-label">Content:</label>
@@ -22,39 +28,39 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import { mapGetters, mapActions } from 'vuex';
+import { defineComponent } from "vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default defineComponent({
-  name: 'EditNoteView',
-  props: ['id'],
+  name: "EditNoteView",
+  props: ["id"],
   data() {
     return {
       form: {
-        title: '',
-        content: '',
+        title: "",
+        content: "",
       },
     };
   },
-  created: function() {
+  created: function () {
     this.GetNote();
   },
   computed: {
-    ...mapGetters({ note: 'stateNote' }),
+    ...mapGetters({ note: "stateNote" }),
   },
   methods: {
-    ...mapActions(['updateNote', 'viewNote']),
+    ...mapActions(["updateNote", "viewNote"]),
     async submit() {
-    try {
-      let note = {
-        id: this.id,
-        form: this.form,
-      };
-      await this.updateNote(note);
-      this.$router.push({name: 'Note', params:{id: this.note.id}});
-    } catch (error) {
-      console.log(error);
-    }
+      try {
+        let note = {
+          id: this.id,
+          form: this.form,
+        };
+        await this.updateNote(note);
+        this.$router.push({ name: "Note", params: { id: this.note.id } });
+      } catch (error) {
+        console.log(error);
+      }
     },
     async GetNote() {
       try {
@@ -63,9 +69,9 @@ export default defineComponent({
         this.form.content = this.note.content;
       } catch (error) {
         console.error(error);
-        this.$router.push('/dashboard');
+        this.$router.push("/dashboard");
       }
-    }
+    },
   },
 });
 </script>

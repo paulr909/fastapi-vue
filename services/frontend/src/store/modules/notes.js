@@ -1,27 +1,27 @@
-import axios from 'axios';
+import axios from "axios";
 
 const state = {
   notes: null,
-  note: null
+  note: null,
 };
 
 const getters = {
-  stateNotes: state => state.notes,
-  stateNote: state => state.note,
+  stateNotes: (state) => state.notes,
+  stateNote: (state) => state.note,
 };
 
 const actions = {
-  async createNote({dispatch}, note) {
-    await axios.post('notes', note);
-    await dispatch('getNotes');
+  async createNote({ dispatch }, note) {
+    await axios.post("notes", note);
+    await dispatch("getNotes");
   },
-  async getNotes({commit}) {
-    let {data} = await axios.get('notes');
-    commit('setNotes', data);
+  async getNotes({ commit }) {
+    let { data } = await axios.get("notes");
+    commit("setNotes", data);
   },
-  async viewNote({commit}, id) {
-    let {data} = await axios.get(`note/${id}`);
-    commit('setNote', data);
+  async viewNote({ commit }, id) {
+    let { data } = await axios.get(`note/${id}`);
+    commit("setNote", data);
   },
   // eslint-disable-next-line no-empty-pattern
   async updateNote({}, note) {
@@ -30,14 +30,14 @@ const actions = {
   // eslint-disable-next-line no-empty-pattern
   async deleteNote({}, id) {
     await axios.delete(`note/${id}`);
-  }
+  },
 };
 
 const mutations = {
-  setNotes(state, notes){
+  setNotes(state, notes) {
     state.notes = notes;
   },
-  setNote(state, note){
+  setNote(state, note) {
     state.note = note;
   },
 };
@@ -46,5 +46,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };

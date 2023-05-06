@@ -13,15 +13,14 @@
   </section>
 </template>
 <script>
-
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'HomeView',
-  computed : {
-    isLoggedIn: function() {
+  name: "HomeView",
+  computed: {
+    isLoggedIn: function () {
       return this.$store.getters.isAuthenticated;
-    }
+    },
   },
 });
 </script>

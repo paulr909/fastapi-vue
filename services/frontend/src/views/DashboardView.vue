@@ -2,12 +2,18 @@
   <div>
     <section>
       <h1>Add new note</h1>
-      <hr/><br/>
+      <hr />
+      <br />
 
       <form @submit.prevent="submit">
         <div class="mb-3">
           <label for="title" class="form-label">Title:</label>
-          <input type="text" name="title" v-model="form.title" class="form-control" />
+          <input
+            type="text"
+            name="title"
+            v-model="form.title"
+            class="form-control"
+          />
         </div>
         <div class="mb-3">
           <label for="content" class="form-label">Content:</label>
@@ -21,24 +27,29 @@
       </form>
     </section>
 
-    <br/><br/>
+    <br /><br />
 
     <section>
       <h1>Notes</h1>
-      <hr/><br/>
+      <hr />
+      <br />
 
       <div v-if="notes.length">
         <div v-for="note in notes" :key="note.id" class="notes">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style="width: 18rem">
             <div class="card-body">
               <ul>
                 <li><strong>Note Title:</strong> {{ note.title }}</li>
                 <li><strong>Author:</strong> {{ note.author.username }}</li>
-                <li><router-link :to="{name: 'Note', params:{id: note.id}}">View</router-link></li>
+                <li>
+                  <router-link :to="{ name: 'Note', params: { id: note.id } }"
+                    >View</router-link
+                  >
+                </li>
               </ul>
             </div>
           </div>
-          <br/>
+          <br />
         </div>
       </div>
 
@@ -50,27 +61,27 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import { mapGetters, mapActions } from 'vuex';
+import { defineComponent } from "vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default defineComponent({
-  name: 'DashboardView',
+  name: "DashboardView",
   data() {
     return {
       form: {
-        title: '',
-        content: '',
+        title: "",
+        content: "",
       },
     };
   },
-  created: function() {
-    return this.$store.dispatch('getNotes');
+  created: function () {
+    return this.$store.dispatch("getNotes");
   },
   computed: {
-    ...mapGetters({ notes: 'stateNotes'}),
+    ...mapGetters({ notes: "stateNotes" }),
   },
   methods: {
-    ...mapActions(['createNote']),
+    ...mapActions(["createNote"]),
     async submit() {
       await this.createNote(this.form);
     },

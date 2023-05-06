@@ -5,41 +5,48 @@
     <p><strong>Author:</strong> {{ note.author.username }}</p>
 
     <div v-if="user.id === note.author.id">
-      <p><router-link :to="{name: 'EditNote', params:{id: note.id}}" class="btn btn-primary">Edit</router-link></p>
-      <p><button @click="removeNote()" class="btn btn-secondary">Delete</button></p>
+      <p>
+        <router-link
+          :to="{ name: 'EditNote', params: { id: note.id } }"
+          class="btn btn-primary"
+          >Edit</router-link
+        >
+      </p>
+      <p>
+        <button @click="removeNote()" class="btn btn-secondary">Delete</button>
+      </p>
     </div>
   </div>
 </template>
 
-
 <script>
-import { defineComponent } from 'vue';
-import { mapGetters, mapActions } from 'vuex';
+import { defineComponent } from "vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default defineComponent({
-  name: 'NoteView',
-  props: ['id'],
+  name: "NoteView",
+  props: ["id"],
   async created() {
     try {
       await this.viewNote(this.id);
     } catch (error) {
       console.error(error);
-      this.$router.push('/dashboard');
+      this.$router.push("/dashboard");
     }
   },
   computed: {
-    ...mapGetters({ note: 'stateNote', user: 'stateUser'}),
+    ...mapGetters({ note: "stateNote", user: "stateUser" }),
   },
   methods: {
-    ...mapActions(['viewNote', 'deleteNote']),
+    ...mapActions(["viewNote", "deleteNote"]),
     async removeNote() {
       try {
         await this.deleteNote(this.id);
-        this.$router.push('/dashboard');
+        this.$router.push("/dashboard");
       } catch (error) {
         console.error(error);
       }
-    }
+    },
   },
 });
 </script>
