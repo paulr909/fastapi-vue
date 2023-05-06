@@ -1,23 +1,25 @@
 <template>
   <div>
-    <p>{{ msg }}</p>
+    <h1>{{ msg }}</h1>
+    <p>Yep that Vue route works.</p>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import { defineComponent } from 'vue';
+import axios from "axios";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'HelloPing',
+  name: "HelloPing",
   data() {
     return {
-      msg: '',
+      msg: "",
     };
   },
   methods: {
     getMessage() {
-      axios.get('/')
+      axios
+        .get("/ping")
         .then((res) => {
           this.msg = res.data;
         })

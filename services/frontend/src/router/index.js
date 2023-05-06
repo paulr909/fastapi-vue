@@ -6,7 +6,8 @@ import DashboardView from '@/views/DashboardView.vue';
 import ProfileView from '@/views/ProfileView.vue';
 import NoteView from '@/views/NoteView.vue';
 import EditNoteView from '@/views/EditNoteView.vue';
-import store from '@/store'; // NEW
+import store from '@/store';
+import HelloPing from "@/components/HelloPing.vue"; // NEW
 
 
 const routes = [
@@ -49,6 +50,12 @@ const routes = [
     name: 'EditNote',
     component: EditNoteView,
     meta: { requiresAuth: true },
+    props: true,
+  },
+    {
+    path: '/ping',
+    name: 'HelloPing',
+    component: HelloPing,
     props: true,
   },
 ]

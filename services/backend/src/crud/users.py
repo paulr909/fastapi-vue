@@ -16,7 +16,7 @@ async def create_user(user) -> UserOutSchema:
         user_obj = await Users.create(**user.dict(exclude_unset=True))
     except IntegrityError:
         raise HTTPException(
-            status_code=401, detail=f"Sorry, that username already exists."
+            status_code=401, detail=f"Sorry, that username already exists"
         )
 
     return await UserOutSchema.from_tortoise_orm(user_obj)
